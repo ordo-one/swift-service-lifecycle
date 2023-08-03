@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.8
 
 import PackageDescription
 
@@ -22,7 +22,12 @@ package.dependencies += [
     .package(url: "https://github.com/apple/swift-atomics.git", from: "1.0.0"),
 ]
 package.targets += [
-    .target(name: "Lifecycle", dependencies: ["Logging", "Metrics", "Backtrace", "Atomics"]),
+    .target(name: "Lifecycle", dependencies: [
+	.product(name: "Logging", package: "swift-log"),
+	.product(name: "Metrics", package: "swift-metrics"),
+	.product(name: "Backtrace", package: "swift-backtrace"),
+	.product(name: "Atomics", package: "swift-atomics"),
+    ]),
 ]
 #else
 package.targets += [
@@ -32,6 +37,9 @@ package.targets += [
 #endif
 
 package.targets += [
-    .target(name: "LifecycleNIOCompat", dependencies: ["Lifecycle", "NIO"]),
+    .target(name: "LifecycleNIOCompat", dependencies: [
+        "Lifecycle",
+        .product(name: "NIO", package: "swift-nio")
+    ]),
     .testTarget(name: "LifecycleTests", dependencies: ["Lifecycle", "LifecycleNIOCompat"]),
 ]
