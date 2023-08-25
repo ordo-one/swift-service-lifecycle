@@ -12,7 +12,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-import ConcurrencyHelpers
+import LifecycleConcurrencyHelpers
 
 /// Execute an operation with a graceful shutdown handler that’s immediately invoked if the current task is shutting down gracefully.
 ///

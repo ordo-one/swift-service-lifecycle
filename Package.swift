@@ -51,7 +51,7 @@ let package = Package(
                     package: "swift-async-algorithms"
                 ),
                 .target(name: "UnixSignals"),
-                .target(name: "ConcurrencyHelpers"),
+                .target(name: "LifecycleConcurrencyHelpers"),
             ]
         ),
         .target(
@@ -63,11 +63,12 @@ let package = Package(
         .target(
             name: "UnixSignals",
             dependencies: [
-                .target(name: "ConcurrencyHelpers"),
+                .target(name: "LifecycleConcurrencyHelpers"),
             ]
         ),
         .target(
-            name: "ConcurrencyHelpers"
+            name: "LifecycleConcurrencyHelpers",
+            path: "Sources/ConcurrencyHelpers"
         ),
         .testTarget(
             name: "ServiceLifecycleTests",
